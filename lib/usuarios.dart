@@ -107,7 +107,7 @@ String? ValorDelCampo= "";
                                         //BOTON GUARDAR QUE GENERA OBJETO CLIENTE Y LO GUARDA EN UNA LISTA
             ElevatedButton(
               onPressed: (){
-                Navigator.pushNamed(context, "Guardar");
+                Navigator.pop(context, "Guardar");
                 datosUsuarios usuario = datosUsuarios(Nombre.text, Apellido1.text, Apellido2.text, DNI.text, FechaNacimiento.text);
                     /* addList() {
                           var usuario = crearAlumno();

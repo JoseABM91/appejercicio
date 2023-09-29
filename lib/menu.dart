@@ -1,8 +1,10 @@
+import 'package:appejercicio/datosusuario.dart';
 import 'package:flutter/material.dart';
 
 
 class Menu extends StatefulWidget{
-  
+                List<datosUsuarios> ListaUsuarios = List.empty(growable: true);
+
   @override
   MenuState createState()=>MenuState();
 }
