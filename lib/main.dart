@@ -36,13 +36,6 @@ class MainApp extends StatelessWidget {
         'menu' : (context) => Menu(),
         'usuarios': (context) => Usuario(),
         'listas' : (context) => const Lista(),
-
-
-
-      /*  'cuadrado2' : (context) => FiguraPage(figura: "cuadrado"),
-        'rectangulo2' : (context) => FiguraPage(figura: "rectangulo"),
-        'triangulo2': (context) => FiguraPage(figura: "triangulo"),
-        */
       },
     );
   }
