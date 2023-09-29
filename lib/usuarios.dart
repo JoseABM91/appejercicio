@@ -107,16 +107,16 @@ String? ValorDelCampo= "";
                                         //BOTON GUARDAR QUE GENERA OBJETO CLIENTE Y LO GUARDA EN UNA LISTA
             ElevatedButton(
               onPressed: (){
-                Navigator.pop(context, "Guardar");
-                datosUsuarios usuario = datosUsuarios(Nombre.text, Apellido1.text, Apellido2.text, DNI.text, FechaNacimiento.text);
-                    /* addList() {
-                          var usuario = crearAlumno();
-                            Lista.add(datosUsuarios);
-                            listaAlumnos;
-  }*/
+
+                if (_formKey.currentState!.validate()){
+                    datosUsuarios usuario = datosUsuarios(Nombre.text, Apellido1.text, Apellido2.text, DNI.text, FechaNacimiento.text);
+                      Navigator.pop(context);
+
+                }
                 //return datosUsuarios(Nombre, Apellido1, Apellido2, DNI, FechaNacimiento);
               },
               child: const Text("Guardar")),
+              
                                        //BOTON CANCELAR QUE TE DEVUELVE AL MENU INICIAL SIN GUARDAR
             ElevatedButton(onPressed: (){
                 Navigator.pop(context, "Cancelar");
