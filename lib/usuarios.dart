@@ -1,3 +1,5 @@
+import 'package:appejercicio/datosusuario.dart';
+import 'package:dni_nie_validator/dni_nie_validator.dart';
 import 'package:flutter/material.dart';
 
 class Usuario extends StatefulWidget{
@@ -16,7 +18,7 @@ class UsuarioState extends State<Usuario>{
   TextEditingController DNI = TextEditingController();
   TextEditingController FechaNacimiento = TextEditingController();
       crearFecha() async{
-    DateTime? fechaSeleccionada = await showDatePicker(
+    DateTime? fechaSeleccionada = await showDatePicker(     //CALENDARIO
       context: context,
       initialDate: DateTime.now(),
       firstDate: DateTime(1800),
@@ -28,9 +30,17 @@ class UsuarioState extends State<Usuario>{
                 }
       });
   }
+    validarDNI(String value) {      //VALIDADOR DNI
+    if (value.isValidDNI()) {
+      return null;
+    }
+    return 'Documento no valido';
+  }
+  
+  
 String? ValorDelCampo= "";
 
-  String? obligadoNombre (String? valorCampo){
+  String? obligadoNombre (String? valorCampo){    //CAMPOS OBLIGATORIOS
     if(valorCampo!.isEmpty){
       return 'Por favor, introduzca el nombre';
     }
@@ -42,6 +52,7 @@ String? ValorDelCampo= "";
     }
     return null;
   }
+
   
 
   @override
@@ -79,6 +90,9 @@ String? ValorDelCampo= "";
                   ),
                   TextFormField (
                   controller: DNI,
+                  validator: (value){
+                  return validarDNI (value!);
+                  },
                   decoration: const InputDecoration(labelText: "DNI"),            //Falta DNI***********************
                   ),
                   //Fecha de nacimiento (datepickerdialog, sout dipicker), opción de particular O empresa(usar choice o dropdown)
@@ -94,6 +108,13 @@ String? ValorDelCampo= "";
             ElevatedButton(
               onPressed: (){
                 Navigator.pushNamed(context, "Guardar");
+                datosUsuarios usuario = datosUsuarios(Nombre.text, Apellido1.text, Apellido2.text, DNI.text, FechaNacimiento.text);
+                    /* addList() {
+                          var usuario = crearAlumno();
+                            Lista.add(datosUsuarios);
+                            listaAlumnos;
+  }*/
+                //return datosUsuarios(Nombre, Apellido1, Apellido2, DNI, FechaNacimiento);
               },
               child: const Text("Guardar")),
                                        //BOTON CANCELAR QUE TE DEVUELVE AL MENU INICIAL SIN GUARDAR
