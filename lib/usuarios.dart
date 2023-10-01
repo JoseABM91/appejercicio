@@ -12,11 +12,23 @@ class UsuarioState extends State<Usuario>{
   List<String> items = ['Particular', 'Empresa'];
   String? selectedItem = 'Particular';
     String mensaje = "";
+    List<datosUsuarios> listaClientes = List.empty(growable:true);
   TextEditingController Nombre = TextEditingController();
   TextEditingController Apellido1 = TextEditingController();
   TextEditingController Apellido2 = TextEditingController();
   TextEditingController DNI = TextEditingController();
   TextEditingController FechaNacimiento = TextEditingController();
+            void guardarCliente(){
+                  datosUsuarios usuario = datosUsuarios(Nombre.text, Apellido1.text, Apellido2.text, DNI.text, FechaNacimiento.text);
+              bool clickadoEmpresa= false;
+              if (clickadoEmpresa){
+              listaClientes.add (usuario);
+            }
+            bool clickadoParticular= false;
+            if (clickadoEmpresa){
+              listaClientes.add (usuario);
+            }
+            }
       crearFecha() async{
     DateTime? fechaSeleccionada = await showDatePicker(     //CALENDARIO
       context: context,
@@ -93,7 +105,7 @@ String? ValorDelCampo= "";
                   validator: (value){
                   return validarDNI (value!);
                   },
-                  decoration: const InputDecoration(labelText: "DNI"),            //Falta DNI***********************
+                  decoration: const InputDecoration(labelText: "DNI"),           
                   ),
                   //Fecha de nacimiento (datepickerdialog, sout dipicker), opción de particular O empresa(usar choice o dropdown)
                     TextFormField (
@@ -104,20 +116,18 @@ String? ValorDelCampo= "";
                   decoration: const InputDecoration(labelText: "Fecha de nacimiento"),
                   
                   ),
-                                        //BOTON GUARDAR QUE GENERA OBJETO CLIENTE Y LO GUARDA EN UNA LISTA
+               //BOTON GUARDAR QUE GENERA OBJETO CLIENTE Y LO GUARDA EN UNA LISTA
             ElevatedButton(
               onPressed: (){
 
                 if (_formKey.currentState!.validate()){
                     datosUsuarios usuario = datosUsuarios(Nombre.text, Apellido1.text, Apellido2.text, DNI.text, FechaNacimiento.text);
                       Navigator.pop(context);
-
                 }
-                //return datosUsuarios(Nombre, Apellido1, Apellido2, DNI, FechaNacimiento);
               },
               child: const Text("Guardar")),
               
-                                       //BOTON CANCELAR QUE TE DEVUELVE AL MENU INICIAL SIN GUARDAR
+            //BOTON CANCELAR QUE TE DEVUELVE AL MENU INICIAL SIN GUARDAR
             ElevatedButton(onPressed: (){
                 Navigator.pop(context, "Cancelar");
               },
@@ -130,28 +140,9 @@ String? ValorDelCampo= "";
             )).toList(),
             onChanged: (item)=> setState (() => selectedItem=item),
         ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0),
-            child: ElevatedButton(
-              onPressed: () {
-              
-                if (_formKey.currentState!.validate()) {
-
-                    _formKey.currentState!.save();
-
-                
-                  ScaffoldMessenger.of(context)
-                      .showSnackBar(const SnackBar(content: Text('Procesando...')));
-                }
-                //guardarCliente(); //guardar en las listas
-              },
-              child: const Text('Guardar cliente'),
-            ),
-          ),
           ]),
     )
     );
   
   }
-  
 }

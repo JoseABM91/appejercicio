@@ -35,7 +35,7 @@ class MainApp extends StatelessWidget {
       routes: {
         'menu' : (context) => Menu(),
         'usuarios': (context) => Usuario(),
-        'listas' : (context) => const Lista(),
+        'listas' : (context) => const ListadoClientes(),
       },
     );
   }
